@@ -85,3 +85,44 @@ VisitorStatBean:-
 
 package ejb; 
 import java.sql. 
+import javax.annotation.PostConstruct; import javax.annotation.PreDestroy; import javax.ejb.Stateless;
+@Stateless
+public class VisitorStatBean
+{
+private Connection conn=null; private ResultSet rs;
+private Statement st=null; private String query =null; @PostConstruct
+public void connect()
+{
+try {
+Class.forName("com.mysql.jdbc.Driver").newInstance(); conn=DriverManager.getConnection("jdbc:mysql://localhost/visitorstat", "root",
+"tiger");
+}
+catch (Exception e) { System.err.println(e.getMessage());
+}
+}
+@PreDestroy
+public void disconnect()
+{
+try {
+conn.close();
+} catch (Exception e) { System.err.println(e.getMessage());
+}
+}
+public void addVisitor(String host)
+{
+try {
+st= conn.createStatement();
+query="insert into userstat (hostname,visits) values ('"+host+"','1')"; st.executeUpdate(query);
+}
+catch (SQLException e)
+{
+try {
+st=conn.createStatement();
+query="update userstat set visits=visits+1 where hostname='"+host+"' "; st.executeUpdate(query);
+}
+catch (SQLException ex) {
+System.err.println("Cannot Update"+e.getMessage());
+}
+}
+}
+}
