@@ -1,0 +1,48 @@
+index.jsp:-
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Validate JSP Page</title>
+</head>
+<body>
+<form action="Validate.jsp">
+Enter Your Name:- <input type="text" name="name" ><br> Enter Your Age:- <input type="text" name="age" ><br> Select Hobbies:-
+<input type="checkbox" name="hob" value="Singing">Singing
+<input type="checkbox" name="hob" value="Reading">Reading Books
+<input type="checkbox" name="hob" value="Football">Playing Football<br> Enter E-mail:- <input type="text" name="email" ><br>
+Select Gender:-
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="female">Female
+<input type="radio" name="gender" value="other">Other<br>
+<input type="hidden" name="error" value="">
+<input type="submit" value="Submit Form">
+</form>
+</body>
+</html>
+
+Validate.jsp:-
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" import="mypack.*">
+</head>
+<body>
+<h1>Validation Page</h1>
+<jsp:useBean id="obj" scope="request" class="mypack.CheckerBean"	>
+<jsp:setProperty name="obj" property="*"/>
+</jsp:useBean>
+<%if (obj.validate())
+{ %>
+<jsp:forward page="successful.jsp"/>
+<% }
+else {%>
+<jsp:include page="index.html"/>
+<%}%>
+<%=obj.getError() %>
+</body>
+</html>
