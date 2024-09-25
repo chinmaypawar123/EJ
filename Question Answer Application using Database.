@@ -45,6 +45,7 @@ out.println("ERROR "+e.getMessage());
 }
 
 QueAnsDBServlet.java:- 
+
 import javax.servlet.*; import javax.servlet.http.*; import java.io.*;
 import java.sql.*;
 public class QueAnsDBServlet extends HttpServlet
