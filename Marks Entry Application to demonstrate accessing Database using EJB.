@@ -1,0 +1,74 @@
+Step 1: Create web application as pract7CMarksApp. Step 2: Create database marksdb
+Step 3: Create tables marks in marksdb database as:
+create table marks (id int primary key auto_increment, sname varchar(35), marks1 int, marks2 int, marks3 int);
+Step 4: create stateful java bean as
+select source package -> session bean -> class name -> MarksEntryBean -> 
+package -> ejb -> bean type-> stateful -> don’t select Local / Remote -> finish.
+
+Index.jsp:-
+
+<%@page import="ejb.MarksEntryBean"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%!
+private static MarksEntryBean obj; public void jspInit()
+{
+Try
+{
+InitialContext ic=new InitialContext(); obj=(MarksEntryBean)ic.lookup("java:global/MarksApp/MarksEntryBean");
+}
+catch(Exception e)
+{
+System.out.println(e);
+}
+}
+%>
+<%
+if(request.getParameter("InsertMarks")!=null)
+{
+String sname;
+int marks1, marks2, marks3;
+sname = request.getParameter("sname"); marks1=Integer.parseInt(request.getParameter("m1"));
+marks2=Integer.parseInt(request.getParameter("m2")); marks3=Integer.parseInt(request.getParameter("m3")); obj.addMarks(sname,marks1,marks2,marks3); out.print("Marks entered successfully..!!!!");
+}
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSP Page</title>
+</head>
+<body>
+<h2>Enter Details</h2>
+<form name="result" method="post">
+Enter student's name: <input type='text' name="sname" /><br> 
+
+Enter subject 1 marks: <input type='text' name="m1" /><br> Enter subject 2 marks: <input type='text' name="m2" /><br> Enter subject 3 marks: <input type='text' name="m3" /><br>
+<input type='submit' name="InsertMarks" /><br>
+</form>
+</body>
+</html>
+
+MarksEntryBean:-
+
+package ejb;
+import java.sql.Connection; import java.sql.DriverManager; import java.sql.Statement; import java.sql.ResultSet; import javax.ejb.Stateful; @Stateful
+public class MarksEntryBean
+{
+String sname; int m1,m2,m3;
+Connection con=null; Statement st=null; String query="";
+public void addMarks(String sname,int m1,int m2,int m3)
+{
+ 
+try
+{
+Class.forName("com.mysql.jdbc.Driver"); 
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/marksdb","root","tiger");
+st=con.createStatement();
+query="insert into marks (sname,marks1,marks2,marks3) values ('"+sname+"','"+m1+"','"+m2+"','"+m3+"')";
+st.executeUpdate(query); System.out.print("Marks entered sucessfully!!");
+}
+catch(Exception e){System.out.println(e);}
+}
+}
+ 
