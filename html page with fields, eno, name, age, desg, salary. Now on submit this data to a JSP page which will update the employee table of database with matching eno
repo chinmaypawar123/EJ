@@ -9,6 +9,54 @@ Enter Employee Number<input type="text" name="txtEno" ><br> Enter Salary to upda
      </body>
         </html>
 
+ManageEmp.jsp:-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+        Connection con = null;
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/employee", "labour", "labour");
+            PreparedStatement ps = con.prepareStatement("select * from office2 where eno=?");
+            ps.setString(1, request.getParameter("id"));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                // Modify record if the record is available in the database
+                PreparedStatement ps1 = con.prepareStatement("update office2 set name=?, age=?, designation=?, salary=? where eno=?");
+                ps1.setString(1, request.getParameter("name"));
+                ps1.setString(2, request.getParameter("age"));
+                ps1.setString(3, request.getParameter("designation"));
+                ps1.setString(4, request.getParameter("salary"));
+                ps1.setString(5, request.getParameter("id"));
+                ps1.executeUpdate();  // Execute the update
+                out.println("<h2>Record Updated Successfully</h2>");
+            } else {
+                // Add record if the record is not available in the database
+                PreparedStatement ps2 = con.prepareStatement("insert into office2(eno, name, age, designation, salary) values (?, ?, ?, ?, ?)");
+                ps2.setString(1, request.getParameter("id"));
+                ps2.setString(2, request.getParameter("name"));
+                ps2.setString(3, request.getParameter("age"));
+                ps2.setString(4, request.getParameter("designtion"));
+                ps2.setString(5, request.getParameter("salary"));
+                ps2.executeUpdate();  // Execute the insert
+                out.println("<h2>Record Added Successfully</h2>");
+            }
+        } catch (Exception ex) {
+            out.println(ex.getMessage());
+        }
+        %>
+    </body>
+</html>
+
+
+
 UpdateEmp.jsp:-
 
 <%@page contentType="text/html" import="java.sql.*" %>
