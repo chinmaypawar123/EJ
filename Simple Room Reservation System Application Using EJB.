@@ -21,7 +21,7 @@ Index.html:-
 <br> <input type="submit" name="btn" value="CheckOUT">
 </form>
 </body>
-</html> 
+</html>  
 
 RoomBean.java:- 
 
@@ -29,7 +29,6 @@ package ejb; import java.sql.*;
 import javax.ejb.Stateless; @Stateless
 public class RoomBean implements RoomBeanLocal
 {
-@Override
 public int checkin(int no)
 {
 try
@@ -54,7 +53,6 @@ catch(Exception e)
 return 0;
 }
 }
-@Override
 public int checkout(int no)
 {
 try
@@ -75,7 +73,12 @@ catch(Exception e)
 return 0;
 }
 }
+
+    public void myTimer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+
 
 RoomBeanLocal.java:-
 
