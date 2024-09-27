@@ -1,108 +1,50 @@
-Index.jsp:-
+elExample.jsp:- 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<h3>welcome to index page</h3>
-<%
-session.setAttribute("user","Admin");
-%>
-<%
-Cookie ck=new Cookie("name","mycookie"); response.addCookie(ck);
-%>
-<form action="ExpressionLanguage.jsp">
-Enter Name:<input type="text" name="name" /><br/><br/>
-<input type="submit" value="Submit"/>
-</form>
-</body>
-    </html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Expression Language Example</title>
+    </head>
+    <body>
+        <!-- Setting attributes using JSP -->
+        <%
+            request.setAttribute("name", "SHRUTI VEDANT GHARE");
+            session.setAttribute("userRole", "Admin");
+            application.setAttribute("appVersion", "1.0.0");
 
-ExpressionLanguage.jsp:-
+            // Setting numbers for arithmetic operations
+            request.setAttribute("number1", 24);
+            request.setAttribute("number2", 6);
+        %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-Welcome, ${ param.name }
-Session Value is ${ sessionScope.user } Cookie name is , ${cookie.name.value}
-</body>
-</html>
+        <h2>Expression Language Example in JSP</h2>
 
-ELArithmeticOperator.jsp:-
+        <!-- Using Expression Language to display attributes -->
+        <p>Request Attribute (name): ${name}</p>
+        <p>Session Attribute (userRole): ${userRole}</p>
+        <p>Application Attribute (appVersion): ${appVersion}</p>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
+        <!-- Arithmetic Operations using EL -->
+        <h3>Arithmetic Operations</h3>
+        <p>Number 1: ${number1}</p>
+        <p>Number 2: ${number2}</p>
+        <p>Sum: ${number1 + number2}</p>
+        <p>Difference: ${number1 - number2}</p>
+        <p>Product: ${number1 * number2}</p>
+        <p>Division: ${number1 / number2}</p>
 
-<%-- LogicalOperator --%>
+        <!-- Logical Operations using EL -->
+        <h3>Logical Operations</h3>
+        <p>${number1 < number2} (Is number1 less than number2?)</p>
+        <p>${number1 != number2} (Is number1 not equal to number2?)</p>
+        <p>${number1 >= 30} (Is number1 greater than or equal to 30?)</p>
 
-<h2>Logical Operator</h2>
-true and true: ${true and true}<br> true && false: ${true && false}<br> true or true: ${true or true}<br>
-true || false: ${true || false}<br> not true: ${not true}<br>
-
-!false: ${!false}
-</body>
-</html>
-
-ELRelationalOperator.jsp:-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<%-- RelationalOperator --%>
-<h2>Relational Operator</h2> 10.0==10: ${10.0==10} <br>
-10.0 eq 10: ${10.0 eq 10} <br>
-((20*10)!= 200): ${((20*10)!= 200)} <br>
-3 ne 3: ${3 ne 3} <br>
-3.2>=2: ${3.2>=2} <br>
-3.2 ge 2: ${3.2 ge 2} <br>
-2<3: ${2<3} <br>
-4 lt 6: ${4 lt 6} <br>
-2 <= 4: ${2 <= 4} <br>
-4 le 2: ${4 le 2}
-</body>
-</html>
-
-ELconditional.jsp:-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<h2>Conditional Operator</h2>
-The result of 10>2 is: "${(10>1)?'greater':'lesser'}"
-</body>
-</html>
-
-Empty.jsp:-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<H1>Empty Operator Example</H1>
-The Value for the Empty operator is:: ${empty "txxt"}
-</body>
+        <!-- Accessing Implicit Objects -->
+        <h3>Implicit Objects</h3>
+        <p>Request Method: ${pageContext.request.method}</p>
+        <p>Session ID: ${pageContext.session.id}</p>
+        <p>Context Path: ${pageContext.request.contextPath}</p>
+    </body>
 </html>
