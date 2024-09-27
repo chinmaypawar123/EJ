@@ -1,72 +1,85 @@
 Index.html:-
   
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
-<head>
-<title>JSP Page</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<a href="SetDemo.jsp">SetDemo</a><br>
-<a href="MaxIF.html">MaxIF</a><br>
-<a href="ForEachDemo.jsp">ForEachDemo</a><br>
-<a href="OutDemo.jsp">OutDemo</a><br>
-<a href="URLDemo.jsp">URLDemo</a><br>
-<a href="Choose_When_Otherwise.jsp">Choose_When_Otherwise</a><br>
-</body>
+    <head>
+        <title>JSTL Core tags </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3><a href="Testing.jsp">Testing</a></h3>
+        <h3><a href="testing2.jsp">Testing 2</a></h3>
+         <h3><a href="testing3.jsp">Testing 3</a></h3>
+          <h3><a href="testing4.jsp">Testing 4</a></h3>
+    </body>
 </html>
+
   
-URlDemo.jsp:-
+Testing.jsp:-
   
+<<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <c:out value="${'Welcome USER'}"/>
+    </body>
+</html>
+
+
+testing2.jsp:-
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<c:url value="/index.html"/>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSTL-if Example</title>
+    </head>
+    <body>
+        <c:set var="income" scope="session" value="${4000*7}"/>
+        <c:if test="${income > 8000}">
+            <p>My Income is: <c:out value="${income}"/></p>
+        </c:if>
+    </body>
 </html>
 
-SetDemo.jsp:-
-
-%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<c:set var="pageTitle" scope="application"
-value="Dukes Soccer Premier League:Registartion"/>
-${pageTitle}
-</body>
-</html>
   
-OutDemo.jsp:-
+testing3.jsp:-
   
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+    <meta charset="UTF-8">
+    <title>JSTL - ForEach Example</title>
 </head>
 <body>
-<c:set var="name" value="Jhon"/>
-My name is: <c:out value="${name}"/>
+    <c:set var="fruits" value="['Apple', 'Banana', 'Cherry']" />
+    
+    <h3>List of Fruits:</h3>
+    <ul>
+        <!-- Iterating through the list of fruits -->
+        <c:forEach var="fruit" items="${fruits}">
+            <li>${fruit}</li>
+        </c:forEach>
+    </ul>
 </body>
 </html>
-MaxIF.jsp:-
+
+testing4.jsp:-
 <html>
 <head>
 <title>TODO supply a title</title>
@@ -78,61 +91,5 @@ MaxIF.jsp:-
 x=<input type="text" name="x" /><br> y=<input type="text" name="y" /><br>
 <input type="submit" value="Check Max" />
 </form>
-</body>
-</html>
-IFDemo.jsp:-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<c:set var="x" value="${param.x}" />
-<c:set var="y" value="${param.y}" />
-<c:if test="${x>y}">
-<font color="blue"><h2>The Ans is:</h2></font>
-<c:out value="${x}is greater than${y}" />
-</c:if>
-</body>
-</html>
-ForEachDemo.jsp:-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<c:forEach begin="1" end="10" var="i">
-The Square of <c:out value="${i}=${i*i}"/><br>
-
-</c:forEach>
-</body>
-</html>
-Choose_When_Otherwise.jsp:-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
-</head>
-<body>
-<c:set var="income" value="${4000*4}"/> Your Income is: <c:out value="${income}"/>
-<c:choose>
-<c:when test="${income<=1000}"> Income is not good
-</c:when>
-<c:when test="${income > 10000}"> Income is very good
-</c:when>
-<c:otherwise>
-Income is undetermined
-</c:otherwise>
-</c:choose>
 </body>
 </html>
