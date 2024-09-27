@@ -1,3 +1,30 @@
+Step 1: Create MySql Database
+Create table guestbook 
+(no int primary key auto_increment, name varchar(20), msg varchar(100), dt varchar(40));
+
+Step 2: Create a Hibernate Project :-
+File -> New Project -> Java Web -> Web application - > Next -> give the project name -
+>	browse the location as required -> 
+select the checkbox – “dedicated folder for storing libraries” -> Next Select glassfish server -> 
+next Select frame work - hibernate -> select the respective database connection -> finish. 
+
+Step 3: Adding Reverse Engineering File :-
+Right click on Project -> new -> other -> select Hibernate ->
+Hibernate Reverse Engineering wizard file type -> next -> file name (hibernate.reveng) , 
+folder -> click on browse and select src->java -> next -> select guestbook table name from the available tables option -> 
+click add ( select the checkbox – include related files) -> finish.
+
+Step 4: Adding Hibernate mapping files and POJOs from Database file type:-
+Right click on Project -> new -> other -> select Hibernate -> 
+Hibernate mapping files and POJOs from Database file type) -> next ->
+keep the default configuration file name file name (hibernate.cfg) and Hibernate Reverse Engineering File (hibernate.reveng) -> 
+type the package name (hibernate) -> finish.
+
+Step 5: Creating JSP File :-
+Right click on project -> new -> JSP -> filename -> guestbookview -> select radiobutton
+-> JSP file (Standard syntax) -> Finish. 
+
+
 Index.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
